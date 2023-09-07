@@ -75,7 +75,7 @@ public class UserService {
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				UserModel user = new UserModel();
-				user.setId(rs.getLong("id"));
+				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
 				user.setEmail(rs.getString("email"));
@@ -98,10 +98,21 @@ public class UserService {
 			ps.setString(3, user.getEmail());
 			ps.setInt(4, user.getAge());
 			ps.setLong(5, user.getId());
-			ps.execute();
+			ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e + "Updating failed.");
 		}
 		return user;
+	}
+	
+	public void deleteUser(int userId) {
+		String deleteQuery = "DELETE FROM USERS WHERE id=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(deleteQuery);
+			ps.setInt(1,userId);
+			ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e + "Deleting failed.");
+		}	
 	}
 }

@@ -6,6 +6,7 @@ import org.swamhtetaung.jersey.crud_jersey.models.UserModel;
 import org.swamhtetaung.jersey.crud_jersey.services.UserService;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
@@ -50,6 +51,12 @@ public class MyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public UserModel updateUser(@PathParam("userId") int userId, UserModel user) {
     	return userService.updateUser(userId, user);
+    }
+    
+    @DELETE
+    @Path("/user/{userId}")
+    public void deleteUser(@PathParam("userId") int userId) {
+    	userService.deleteUser(userId);
     }
     
 }
