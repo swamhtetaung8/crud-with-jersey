@@ -9,6 +9,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
@@ -33,5 +34,12 @@ public class MyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public UserModel storeUser(UserModel user) {
     	return userService.storeUser(user);
+    }
+    
+    @GET
+    @Path("/user/{userId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserModel getUserById(@PathParam("userId") int userId) {
+    	return userService.getUserById(userId);
     }
 }

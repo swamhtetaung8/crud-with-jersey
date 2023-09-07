@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,8 +64,27 @@ public class UserService {
 		}
 		
 		return users;
-		
-		
-		
+	}
+	
+	public UserModel getUserById(int userId) {
+		UserModel userResult = null;
+		String retrieveQuery = "SELECT * FROM USERS WHERE id=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(retrieveQuery);
+			ps.setLong(1, userId);
+			ResultSet rs = ps.executeQuery();
+			while(rs.next()) {
+				UserModel user = new UserModel();
+				user.setId(rs.getLong("id"));
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setEmail(rs.getString("email"));
+				user.setAge(rs.getInt("age"));
+				userResult = user;
+			}
+		} catch (Exception e) {
+			System.out.println(e + "Data retrieving failed.");
+		}
+		return userResult;
 	}
 }
