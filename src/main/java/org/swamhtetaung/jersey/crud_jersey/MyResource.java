@@ -1,5 +1,7 @@
 package org.swamhtetaung.jersey.crud_jersey;
 
+import java.util.List;
+
 import org.swamhtetaung.jersey.crud_jersey.models.UserModel;
 import org.swamhtetaung.jersey.crud_jersey.services.UserService;
 
@@ -19,9 +21,10 @@ public class MyResource {
 	UserService userService = new UserService();
 
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
-        return "Got it!";
+    @Path("/user")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<UserModel> getUsers() {
+        return userService.getUsers();
     }
     
     @POST

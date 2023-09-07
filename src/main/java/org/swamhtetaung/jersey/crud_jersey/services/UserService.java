@@ -3,7 +3,10 @@ package org.swamhtetaung.jersey.crud_jersey.services;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.swamhtetaung.jersey.crud_jersey.models.UserModel;
 
@@ -38,5 +41,32 @@ public class UserService {
 			System.out.println(e + "Data insertion failed.");
 		}
 		return user;
+	}
+	
+	public List<UserModel> getUsers(){
+		List<UserModel> users = new ArrayList<>();
+		
+		String retrieveQuery = "SELECT * FROM USERS";
+		try {
+			PreparedStatement ps = conn.prepareStatement(retrieveQuery);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				UserModel user = new UserModel();
+				user.setId(rs.getLong("id"));
+				user.setFirstName(rs.getString("first_name"));
+				user.setLastName(rs.getString("last_name"));
+				user.setEmail(rs.getString("email"));
+				user.setAge(rs.getInt("age"));
+				users.add(user);
+			}
+		} catch (Exception e) {
+			System.out.println(e + "Data retrieving failed.");
+		}
+		
+		return users;
+		
+		
+		
 	}
 }
