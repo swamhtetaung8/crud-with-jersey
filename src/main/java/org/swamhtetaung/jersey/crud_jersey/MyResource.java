@@ -8,6 +8,7 @@ import org.swamhtetaung.jersey.crud_jersey.services.UserService;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -42,4 +43,13 @@ public class MyResource {
     public UserModel getUserById(@PathParam("userId") int userId) {
     	return userService.getUserById(userId);
     }
+    
+    @PUT
+    @Path("/user/{userId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public UserModel updateUser(@PathParam("userId") int userId, UserModel user) {
+    	return userService.updateUser(userId, user);
+    }
+    
 }

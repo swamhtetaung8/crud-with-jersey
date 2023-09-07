@@ -52,7 +52,7 @@ public class UserService {
 			
 			while(rs.next()) {
 				UserModel user = new UserModel();
-				user.setId(rs.getLong("id"));
+				user.setId(rs.getInt("id"));
 				user.setFirstName(rs.getString("first_name"));
 				user.setLastName(rs.getString("last_name"));
 				user.setEmail(rs.getString("email"));
@@ -86,5 +86,22 @@ public class UserService {
 			System.out.println(e + "Data retrieving failed.");
 		}
 		return userResult;
+	}
+	
+	public UserModel updateUser(int userId,UserModel user) {
+		user.setId(userId);
+		String updateQuery = "UPDATE USERS SET first_name=? , last_name=? , email=? , age=? WHERE id=?";
+		try {
+			PreparedStatement ps = conn.prepareStatement(updateQuery);
+			ps.setString(1, user.getFirstName());
+			ps.setString(2, user.getLastName());
+			ps.setString(3, user.getEmail());
+			ps.setInt(4, user.getAge());
+			ps.setLong(5, user.getId());
+			ps.execute();
+		} catch (Exception e) {
+			System.out.println(e + "Updating failed.");
+		}
+		return user;
 	}
 }

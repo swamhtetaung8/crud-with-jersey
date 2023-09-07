@@ -1,7 +1,7 @@
 package org.swamhtetaung.jersey.crud_jersey.models;
 
 public class UserModel {
-	private Long id;
+	private Integer id;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -11,17 +11,17 @@ public class UserModel {
 		
 	}
 	
-	public UserModel(Long id,String firstName, String lastName, String email, Integer age) {
+	public UserModel(Integer id,String firstName, String lastName, String email, Integer age) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.age = age;
 	}
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getFirstName() {
