@@ -16,22 +16,23 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 
 /**
- * Root resource (exposed at "myresource" path)
+ * Root resource (exposed at "api" path)
  */
-@Path("crud")
-public class MyResource {
+
+@Path("api")
+public class UserResource {
 	
 	UserService userService = new UserService();
 
     @GET
-    @Path("/user")
+    @Path("/users")
     @Produces(MediaType.APPLICATION_JSON)
     public List<UserModel> getUsers() {
         return userService.getUsers();
     }
     
     @POST
-    @Path("/user")
+    @Path("/users")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public UserModel storeUser(UserModel user) {
@@ -39,14 +40,14 @@ public class MyResource {
     }
     
     @GET
-    @Path("/user/{userId}")
+    @Path("/users/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
     public UserModel getUserById(@PathParam("userId") int userId) {
     	return userService.getUserById(userId);
     }
     
     @PUT
-    @Path("/user/{userId}")
+    @Path("/users/{userId}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public UserModel updateUser(@PathParam("userId") int userId, UserModel user) {
@@ -54,7 +55,7 @@ public class MyResource {
     }
     
     @DELETE
-    @Path("/user/{userId}")
+    @Path("/users/{userId}")
     public void deleteUser(@PathParam("userId") int userId) {
     	userService.deleteUser(userId);
     }
