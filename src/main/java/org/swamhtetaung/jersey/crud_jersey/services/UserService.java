@@ -110,7 +110,7 @@ public class UserService {
 		try {
 			PreparedStatement ps = conn.prepareStatement(deleteQuery);
 			ps.setInt(1,userId);
-			ps.executeUpdate();
+			ps.execute();
 		} catch (Exception e) {
 			System.out.println(e + "Deleting failed.");
 		}	
